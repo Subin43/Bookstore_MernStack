@@ -13,13 +13,13 @@ const MONGO_URL = process.env.MONGO_URL;
 app.use(express.json());
 // control the unauthorized request from browser
 // Method: 1
-app.use(cors())
+//app.use(cors())
 // method:2 
-/*app.use(cors({
-    origin: 'http://localhost:5000',
+app.use(cors({
+    origin: 'http://deploy-mern-1whq.vercel.app',
     content:['GET','POST','DELETE',"PUT"],
-    allowedHeaders:['Content-Type']
-}))*/
+    credentials:true
+}))
 app.use('/books',bookRoute)
 
 mongoose
