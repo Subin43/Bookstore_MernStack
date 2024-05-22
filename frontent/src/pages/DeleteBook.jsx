@@ -15,7 +15,7 @@ const DeleteBook = () => {
     setLoading(true);
     axios
      // .delete(`http://localhost:5000/books/${id}`)
-    delete(`bookstore-mern-stack-backend.vercel.app/${id}`)
+    .delete(`bookstore-mern-stack-backend.vercel.app/${id}`)
       
 
       .then(() => {
