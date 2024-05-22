@@ -20,7 +20,7 @@ export default function CreateBook() {
       publishedYear,
     };
     setLoading(true);
-    axios.post('bookstore-mern-stack-backend.vercel.app',data)
+    axios.post('bookstore-mern-stack-backend.vercel.app/books',data)
     .then(()=>{
       setLoading(false);
       enqueueSnackbar('Book created successfully',{variant:'success'})
