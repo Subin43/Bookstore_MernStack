@@ -16,7 +16,7 @@ app.use(express.json());
 //app.use(cors())
 // method:2 
 app.use(cors({
-    origin: 'http://deploy-mern-1whq.vercel.app',
+    origin: 'bookstore-mern-stack-frontend.vercel.app',
     content:['GET','POST','DELETE',"PUT"],
     credentials:true
 }))
