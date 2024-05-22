@@ -1,10 +1,13 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 
 export default function BooksTable({ books = [] }) {
-  if (books.length === 0) {
+  console.log("Books prop: ", books); // Debugging log
+
+  if (!books || books.length === 0) {
     return <p>No books available.</p>;
   }
 
