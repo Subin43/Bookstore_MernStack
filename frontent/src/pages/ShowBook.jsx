@@ -10,7 +10,7 @@ export default function ShowBook() {
   const {id} = useParams;
   useEffect(()=>{
     setLoading(true);
-    axios.get(`bookstore-mern-stack-backend.vercel.app/${id}`)
+    axios.get(`bookstore-mern-stack-backend.vercel.app/books/${id}`)
     .then((res)=>{
       setBook(res.data);
       setLoading(false);
