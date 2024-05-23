@@ -16,12 +16,12 @@ if (!MONGO_URL) {
 }
 
 app.use(express.json());
-app.use(cors({
+/*app.use(cors({
   origin: 'bookstore-mern-stack-frontend.vercel.app',
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true
-}));
-
+}));*/
+app.use(cors());
 app.use('/books', bookRoute);
 
 mongoose
