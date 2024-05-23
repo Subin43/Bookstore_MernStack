@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: my-backend
+    name: Backend
     env: node
     plan: free
     buildCommand: 'cd src && npm install'
