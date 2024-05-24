@@ -1,40 +1,41 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors';
+import cors from 'cors'
 import mongoose from 'mongoose';
 import bookRoute from './routes/bookRoute.js';
 
 dotenv.config();
 
-const createServer = () => {
-  const app = express();
-  const PORT = process.env.PORT || 8000;
-  const MONGO_URL = process.env.MONGO_URL;
+const app = express();
 
-  if (!MONGO_URL) {
-    console.error('MONGO_URL not defined in environment variables');
-    process.exit(1); // Exit the process with an error code
-  }
-
-  app.use(express.json());
-  app.use(cors({
-    origin: 'bookstore-mern-stack-frontend.vercel.app',
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    credentials: true
-  }));
-  app.use('/books', bookRoute);
-
-  mongoose
-    .connect(MONGO_URL)
-    .then(() => {
-      console.log('App connected to database');
-    })
-    .catch((error) => {
-      console.error('Failed to connect to the database:', error);
-      process.exit(1); // Exit the process with an error code
-    });
-
-  return app;
+const PORT = process.env.PORT || 8000; // Set a default port if PORT is not provided in .env
+const MONGO_URL = process.env.MONGO_URL;
+app.use(express.json());
+// control the unauthorized request from browser
+// Method: 1
+const corsConfig = {
+  origin: '*',
+  credentials:true,
+    content:['GET','POST','DELETE',"PUT"],
 };
+app.options("",(corsConfig));
+app.use(cors(corsConfig))
+// method:2 
+/*app.use(cors({
+    origin: 'http://localhost:5000',
+    content:['GET','POST','DELETE',"PUT"],
+    allowedHeaders:['Content-Type']
+}))*/
+app.use('/books',bookRoute)
 
-export default createServer;
+mongoose
+  .connect(MONGO_URL)
+  .then(() => {
+    console.log('App connected to database');
+    app.listen(PORT, () => {
+      console.log(`App is listening to port: ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
