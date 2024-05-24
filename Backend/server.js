@@ -33,5 +33,7 @@ mongoose
     process.exit(1); // Exit the process with an error code
   });
 
-// Export the Express app directly
-export default app;
+// Export a default function that returns the Express app
+export default function () {
+  return app;
+}
