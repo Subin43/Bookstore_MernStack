@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(()=>{
     setLoading(true);
-    axios.get('bookstore-mern-stack-backend.vercel.app/books/all')
+    axios.get('https://bookstore-mernstack-1.onrender.com/books/all')
     .then((res)=>{
       setBooks(res.data.data)
       setLoading(false)
