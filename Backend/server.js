@@ -33,16 +33,5 @@ mongoose
     process.exit(1); // Exit the process with an error code
   });
 
-// Lambda handler function
-export const handler = async (event, context) => {
-  return await new Promise((resolve, reject) => {
-    // Invoke the Express app
-    app(event, context, (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-};
+// Export the Express app directly
+export default app;
