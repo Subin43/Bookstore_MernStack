@@ -29,14 +29,11 @@ mongoose
   .connect(MONGO_URL)
   .then(() => {
     console.log('App connected to database');
-    app.listen(PORT, () => {
-      console.log(`App is listening on port: ${PORT}`);
-    });
   })
   .catch((error) => {
     console.error('Failed to connect to the database:', error);
     process.exit(1); // Exit the process with an error code
   });
 
-// Export the app as a handler for serverless
+// Export a function that serves as the handler for AWS Lambda
 export const handler = serverless(app);
