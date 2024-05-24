@@ -1,21 +1,7 @@
-service: my-express-app
-
-provider:
-  name: aws
-  runtime: nodejs14.x
-  environment:
-    MONGO_URL: ${env:MONGO_URL}
-
-functions:
-  app:
-    handler: Backend/server.handler
-    events:
-      - http:
-          path: /
-          method: any
-      - http:
-          path: /{proxy+}
-          method: any
-
-plugins:
-  - serverless-offline
+ services:
+  - type: web
+    name: Backend
+    env: node
+    plan: free
+    buildCommand: 'cd src && npm install'
+    startCommand: 'cd src && npm start'
