@@ -35,5 +35,6 @@ mongoose
     process.exit(1); // Exit the process with an error code
   });
 
-// Export a function that serves as the handler for AWS Lambda
-export const handler = serverless(app);
+// Export the app as a handler for serverless
+const handler = serverless(app);
+export default handler;
