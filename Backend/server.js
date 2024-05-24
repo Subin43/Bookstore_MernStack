@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bookRoute from './routes/bookRoute.js';
+import serverless from 'serverless-http';
 
 dotenv.config();
 
@@ -16,12 +17,12 @@ if (!MONGO_URL) {
 }
 
 app.use(express.json());
-/*app.use(cors({
+app.use(cors({
   origin: 'bookstore-mern-stack-frontend.vercel.app',
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true
-}));*/
-app.use(cors());
+}));
+/*app.use(cors());*/
 app.use('/books', bookRoute);
 
 mongoose
@@ -36,3 +37,6 @@ mongoose
     console.error('Failed to connect to the database:', error);
     process.exit(1); // Exit the process with an error code
   });
+
+// Export the app as a handler for serverless
+export const handler = serverless(app);
