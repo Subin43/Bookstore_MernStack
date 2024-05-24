@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bookRoute from './routes/bookRoute.js';
-import serverless from 'serverless-http';
 
 dotenv.config();
 
@@ -22,7 +21,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true
 }));
-/*app.use(cors());*/
 app.use('/books', bookRoute);
 
 mongoose
@@ -35,6 +33,16 @@ mongoose
     process.exit(1); // Exit the process with an error code
   });
 
-// Export the app as a handler for serverless
-const handler = serverless(app);
-export default handler;
+// Lambda handler function
+export const handler = async (event, context) => {
+  return await new Promise((resolve, reject) => {
+    // Invoke the Express app
+    app(event, context, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
